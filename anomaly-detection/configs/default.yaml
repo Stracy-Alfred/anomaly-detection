@@ -1,0 +1,41 @@
+# ─── Data ───────────────────────────────────────────────────────────────
+data:
+  machine_id: "machine-1-1"        # SMD machine to load
+  raw_dir: "data/raw"              # where raw CSVs live
+  processed_dir: "data/processed"  # scaled / windowed caches
+
+# ─── Windowing ──────────────────────────────────────────────────────────
+window:
+  length: 100                      # sliding-window size (time steps)
+  stride: 1                        # stride between consecutive windows
+
+# ─── Model — LSTM Autoencoder ───────────────────────────────────────────
+lstm_ae:
+  hidden_dim: 128                  # LSTM hidden units
+  latent_dim: 64                   # bottleneck dimension
+  num_layers: 2                    # LSTM layers in encoder / decoder
+  dropout: 0.2                     # dropout between LSTM layers
+
+# ─── Model — Isolation Forest ──────────────────────────────────────────
+iforest:
+  n_estimators: 200
+  contamination: "auto"            # let sklearn pick
+  feature_mode: "summary"          # "summary" (mean/std/min/max) or "flatten"
+
+# ─── Training ──────────────────────────────────────────────────────────
+training:
+  epochs: 50
+  batch_size: 256
+  lr: 0.001
+  weight_decay: 0.0001
+  grad_clip: 1.0
+  early_stop_patience: 7           # epochs without val-loss improvement
+  val_split: 0.2                   # fraction of train held out for val
+
+# ─── Evaluation ────────────────────────────────────────────────────────
+evaluation:
+  threshold_percentile: 99         # on validation reconstruction errors
+  results_dir: "results"
+
+# ─── Reproducibility ──────────────────────────────────────────────────
+seed: 42

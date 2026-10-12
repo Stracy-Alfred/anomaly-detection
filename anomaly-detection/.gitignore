@@ -1,0 +1,19 @@
+# ── Data ────────────────────────────────────────────────────────────
+data/
+
+# ── Results (keep metrics.json, ignore large checkpoints locally) ──
+results/checkpoints/
+
+# ── Python ──────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ── Jupyter ─────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── OS ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
